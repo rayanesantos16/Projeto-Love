@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Futuro ❤️</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <div class="controle-musica" onclick="alternarMusica()">
+        <span id="iconeMusica">🎵</span>
+    </div>
+
+    <div class="botoes-topo">
+        <button class="btn-navegar" onclick="navegarPara('galeria.html')">⬅️ Voltar para Galeria</button>
+    </div>
+
+    <div class="container extras-container">
+        <div class="pergunta-foge">
+            <h2>Você aceita continuar me fazendo a pessoa mais feliz do mundo para sempre? 💍</h2>
+            <div class="botoes-foge">
+                <button onclick="aceitouFoge()">SIM!</button>
+                <button id="btnNao" onmouseover="fugirBotao()" onclick="fugirBotao()">NÃO</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+</body>
+</html>

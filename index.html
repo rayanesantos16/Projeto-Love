@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabéns, meu amor! ❤️</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <div class="controle-musica" onclick="alternarMusica()">
+        <span id="iconeMusica">🎵</span>
+    </div>
+
+    <div class="container">
+        <div class="foto-placeholder">💝</div>
+        <h1>Feliz Aniversário, Meu Amor!</h1>
+        <p>Hoje é o dia da pessoa mais especial do meu mundo. Preparei um espaço inteiramente nosso cheio de carinho para você!</p>
+        
+        <div class="contador-container">
+            <h3>Contagem regressiva:</h3>
+            <div id="dataAlvo">feliz Aniversáriooooo...</div>
+        </div>
+
+        <button onclick="surpresaRomantica()">Comemorar! 👇</button>
+        
+        <div class="navegacao-paginas">
+            <button class="btn-navegar" onclick="navegarPara('surpresas.html')">Ver Surpresas ➡️</button>
+        </div>
+    </div>
+
+    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+</body>
+</html>

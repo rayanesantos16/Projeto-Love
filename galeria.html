@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Galeria e Quiz ❤️</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <div class="controle-musica" onclick="alternarMusica()">
+        <span id="iconeMusica">🎵</span>
+    </div>
+
+    <div class="botoes-topo">
+        <button class="btn-navegar" onclick="navegarPara('surpresas.html')">⬅️ Voltar para Surpresas</button>
+    </div>
+
+    <div class="container extras-container">
+        <h2>Nossos Momentos 📸</h2>
+        <div class="carrossel">
+            <div class="slides">
+                <div class="slide ativo"><img src="foto1.jpg" alt="Foto 1"><p>Uma historia só Nossa</p></div>
+                <div class="slide"><img src="foto2.jpg" alt="Foto 2"><p>Seu maior sonho sempre te apoiarei</p></div>
+                <div class="slide"><img src="foto3.jpg" alt="Foto 3"><p>Para sempre juntos em todos os multiversos</p></div>
+            </div>
+            <button class="nav-carrossel ant" onclick="mudarSlide(-1)">❮</button>
+            <button class="nav-carrossel prox" onclick="mudarSlide(1)">❯</button>
+        </div>
+
+        <div class="quiz-container">
+            <h2>Quiz do Casal 🧠❤️</h2>
+            <p id="perguntaQuiz">Onde foi o nosso primeiro beijo?</p>
+            <div class="opcoes-quiz">
+                <button onclick="verificarResposta(this, false)">No Cinema</button>
+                <button onclick="verificarResposta(this, true)">Na Escola</button>
+                <button onclick="verificarResposta(this, false)">Minha Casa</button>
+            </div>
+            <p id="resultadoQuiz"></p>
+        </div>
+
+        <div class="navegacao-paginas" style="margin-top: 30px;">
+            <button class="btn-navegar" onclick="navegarPara('futuro.html')">Olhar para o Nosso Futuro ➡️</button>
+        </div>
+    </div>
+
+    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+</body>
+</html>
