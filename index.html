@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parabéns, meu amor! ❤️</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b10">
+  <title>Feliz aniversário, meu amor ❤️</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
 </head>
-<body>
-
-    <div class="controle-musica" onclick="alternarMusica()">
-        <span id="iconeMusica">🎵</span>
+<body data-page="inicio">
+  <audio id="musicaParabens" loop>
+    <source
+        src="nastelbom-happy-birthday-471481.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+  <div class="glow glow-one"></div><div class="glow glow-two"></div>
+  <button class="music-control" type="button" onclick="alternarMusica()" aria-label="Ativar ou pausar música">
+    <span id="iconeMusica">♫</span><span class="music-label">Música</span>
+  </button>
+  <main class="container hero">
+    <div class="eyebrow"><span>✦</span> UM DIA ESPECIAL <span>✦</span></div>
+    <div class="hero-heart" aria-hidden="true">♥</div>
+    <p class="script-label">Para a pessoa que faz meus dias mais bonitos</p>
+    <h1>Feliz aniversário,<br><span>meu amor.</span></h1>
+    <div class="gold-line"></div>
+    <p class="lead">Hoje é o dia de celebrar a sua vida — e eu sou muito feliz por poder fazer parte dela. Preparei este cantinho com carinho, lembranças e pedacinhos da nossa história.</p>
+    <button class="btn btn-gold" type="button" onclick="surpresaRomantica()">Começar nossa surpresa <span>♥</span></button>
+    <div class="page-links">
+      <a class="btn btn-outline" href="surpresas.html">Conhecer as surpresas <span>→</span></a>
     </div>
-
-    <div class="container">
-        <div class="foto-placeholder">💝</div>
-        <h1>Feliz Aniversário, Meu Amor!</h1>
-        <p>Hoje é o dia da pessoa mais especial do meu mundo. Preparei um espaço inteiramente nosso cheio de carinho para você!</p>
-        
-        <div class="contador-container">
-            <h3>Contagem regressiva:</h3>
-            <div id="dataAlvo">feliz Aniversáriooooo...</div>
-        </div>
-
-        <button onclick="surpresaRomantica()">Comemorar! 👇</button>
-        
-        <div class="navegacao-paginas">
-            <button class="btn-navegar" onclick="navegarPara('surpresas.html')">Ver Surpresas ➡️</button>
-        </div>
+    <p class="signature">Feito com amor, especialmente para você.</p>
+  </main>
+  <div class="floating-hearts" aria-hidden="true"></div>
+  <div id="janelaSurpresa" class="modal" role="dialog" aria-modal="true" aria-labelledby="textoSurpresa" style="display:none">
+    <div class="modal-content">
+      <button class="close-modal" onclick="fecharSurpresa()" aria-label="Fechar">×</button>
+      <div class="modal-heart">♥</div><p class="eyebrow">UMA MENSAGEM PARA VOCÊ</p>
+      <p id="textoSurpresa"></p>
+      <button class="btn btn-gold" onclick="fecharSurpresa()">Guardar no coração ♥</button>
     </div>
-
-    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+  </div>
+  <audio id="musicaParabens" preload="none" loop></audio>
+  <footer>COM TODO O MEU AMOR <span>✦</span></footer>
 </body>
 </html>

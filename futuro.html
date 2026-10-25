@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosso Futuro ❤️</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b10">
+  <title>Nosso futuro ❤️</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
 </head>
-<body>
-
-    <div class="controle-musica" onclick="alternarMusica()">
-        <span id="iconeMusica">🎵</span>
+<body data-page="futuro">
+  <button class="music-control" type="button" onclick="alternarMusica()" aria-label="Ativar ou pausar música"><span id="iconeMusica">♫</span><span class="music-label">Música</span></button>
+  <header class="subpage-header">
+    <a class="back-link" href="galeria.html">← Voltar para a galeria</a>
+    <p class="eyebrow">O QUE AINDA VAMOS VIVER</p>
+    <h1>Nosso <span>futuro</span></h1>
+    <p>Que a vida nos dê muitos motivos para continuar escolhendo um ao outro.</p>
+  </header>
+  <main class="container extras-container future-container">
+    <div class="ring-icon">♕</div>
+    <p class="script-label">Uma perguntinha importante...</p>
+    <h2>Você aceita continuar construindo momentos lindos comigo?</h2>
+    <p>Que venham novos sonhos, novas histórias, muito companheirismo e amor em cada fase da vida.</p>
+    <div class="future-buttons">
+      <button class="btn btn-gold" onclick="aceitouFoge()">SIM, mil vezes! ♥</button>
+      <button class="btn btn-no" id="btnNao" onmouseenter="fugirBotao()" onclick="fugirBotao()">NÃO</button>
     </div>
-
-    <div class="botoes-topo">
-        <button class="btn-navegar" onclick="navegarPara('galeria.html')">⬅️ Voltar para Galeria</button>
-    </div>
-
-    <div class="container extras-container">
-        <div class="pergunta-foge">
-            <h2>Você aceita continuar me fazendo a pessoa mais feliz do mundo para sempre? 💍</h2>
-            <div class="botoes-foge">
-                <button onclick="aceitouFoge()">SIM!</button>
-                <button id="btnNao" onmouseover="fugirBotao()" onclick="fugirBotao()">NÃO</button>
-            </div>
-        </div>
-    </div>
-
-    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+    <p id="mensagemFuturo" class="future-message" aria-live="polite"></p>
+    <div class="center-action"><a class="btn btn-outline" href="index.html">Voltar ao começo ↺</a></div>
+  </main>
+  <div class="floating-hearts" aria-hidden="true"></div>
+  <audio id="musicaParabens" preload="none" loop></audio>
+  <footer>COM TODO O MEU AMOR <span>✦</span></footer>
 </body>
 </html>

@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa Galeria e Quiz ❤️</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b10">
+  <title>Nossa galeria ❤️</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
 </head>
-<body>
-
-    <div class="controle-musica" onclick="alternarMusica()">
-        <span id="iconeMusica">🎵</span>
-    </div>
-
-    <div class="botoes-topo">
-        <button class="btn-navegar" onclick="navegarPara('surpresas.html')">⬅️ Voltar para Surpresas</button>
-    </div>
-
-    <div class="container extras-container">
-        <h2>Nossos Momentos 📸</h2>
-        <div class="carrossel">
-            <div class="slides">
-                <div class="slide ativo"><img src="foto1.jpg" alt="Foto 1"><p>Uma historia só Nossa</p></div>
-                <div class="slide"><img src="foto2.jpg" alt="Foto 2"><p>Seu maior sonho sempre te apoiarei</p></div>
-                <div class="slide"><img src="foto3.jpg" alt="Foto 3"><p>Para sempre juntos em todos os multiversos</p></div>
-            </div>
-            <button class="nav-carrossel ant" onclick="mudarSlide(-1)">❮</button>
-            <button class="nav-carrossel prox" onclick="mudarSlide(1)">❯</button>
-        </div>
-
-        <div class="quiz-container">
-            <h2>Quiz do Casal 🧠❤️</h2>
-            <p id="perguntaQuiz">Onde foi o nosso primeiro beijo?</p>
-            <div class="opcoes-quiz">
-                <button onclick="verificarResposta(this, false)">No Cinema</button>
-                <button onclick="verificarResposta(this, true)">Na Escola</button>
-                <button onclick="verificarResposta(this, false)">Minha Casa</button>
-            </div>
-            <p id="resultadoQuiz"></p>
-        </div>
-
-        <div class="navegacao-paginas" style="margin-top: 30px;">
-            <button class="btn-navegar" onclick="navegarPara('futuro.html')">Olhar para o Nosso Futuro ➡️</button>
-        </div>
-    </div>
-
-    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+<body data-page="galeria">
+  <button class="music-control" type="button" onclick="alternarMusica()" aria-label="Ativar ou pausar música"><span id="iconeMusica">♫</span><span class="music-label">Música</span></button>
+  <header class="subpage-header">
+    <a class="back-link" href="surpresas.html">← Voltar para surpresas</a>
+    <p class="eyebrow">FOTOGRAFIAS, RISADAS E MEMÓRIAS</p>
+    <h1>Nossos <span>momentos</span></h1>
+    <p>Se eu pudesse guardar o tempo, escolheria estes pedacinhos com você.</p>
+  </header>
+  <main class="container extras-container">
+    <section class="carousel" aria-label="Carrossel de fotos">
+      <div class="slides">
+        <div class="slide active"><img src="IMG_20260314_225853.jpg" alt="Nossa história" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-fallback">♥<small></small></div></div>
+        <div class="slide"><img src="IMG_20261010_193507_567.webp" alt="Apoio e sonhos" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-fallback">✦<small></small></div></div>
+        <div class="slide"><img src="IMG-20260619-WA0060.jpg" alt="Nosso futuro" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-fallback">♥<small></small></div></div>
+      </div>
+      <button class="carousel-nav prev" onclick="mudarSlide(-1)" aria-label="Foto anterior">❮</button>
+      <button class="carousel-nav next" onclick="mudarSlide(1)" aria-label="Próxima foto">❯</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+    <section class="quiz-container">
+      <p class="eyebrow">VAMOS VER SE VOCÊ LEMBRA?</p>
+      <h2>Quiz do casal <span>♥</span></h2>
+      <p id="perguntaQuiz">Onde foi o nosso primeiro beijo?</p>
+      <div class="quiz-options">
+        <button onclick="verificarResposta(this, false)">No cinema</button>
+        <button onclick="verificarResposta(this, true)">Na escola</button>
+        <button onclick="verificarResposta(this, false)">Na minha casa</button>
+      </div>
+      <p id="resultadoQuiz" aria-live="polite"></p>
+      <p class="quiz-note">Você pode personalizar a pergunta e as respostas no arquivo index.html.</p>
+    </section>
+    <div class="center-action"><a class="btn btn-gold" href="futuro.html">Olhar para o nosso futuro →</a></div>
+  </main>
+  <audio id="musicaParabens" preload="none" loop></audio>
+  <footer>COM TODO O MEU AMOR <span>✦</span></footer>
 </body>
 </html>

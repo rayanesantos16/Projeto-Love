@@ -1,203 +1,284 @@
-let intervaloContador;
-let t_id;
 
-// Gerenciamento Inteligente do Estado da Música (Mantém tocando entre páginas)
-window.addEventListener('DOMContentLoaded', () => {
-    const musica = document.getElementById('musicaParabens');
-    const icone = document.getElementById('iconeMusica');
-    
-    // Verifica se a música deve estar tocando de acordo com a sessão anterior
-    if (sessionStorage.getItem('musicaTocando') === 'true' && musica) {
-        musica.currentTime = parseFloat(sessionStorage.getItem('musicaTempo') || 0);
-        musica.play().catch(() => sessionStorage.setItem('musicaTocando', 'false'));
-        if (icone) icone.innerText = "🎵";
-    }
+/* Personalize este arquivo com suas mensagens e sua música. */
 
-    // Salva a posição da música de forma contínua antes de mudar de página
-    setInterval(() => {
-        if (musica && !musica.paused) {
-            sessionStorage.setItem('musicaTempo', musica.currentTime);
-        }
-    }, 500);
+const mensagensSurpresa = {
+  1: "A nossa história é uma das minhas partes favoritas da vida. Obrigada por cada lembrança, cada sorriso e por tudo o que ainda vamos viver. Eu escolheria conhecer você de novo, em cada versão da nossa história. ♥",
 
-    // Liga o contador se estiver na página inicial
-    if (document.getElementById('contador')) {
-        intervaloContador = setInterval(atualizarContador, 1000);
-        atualizarContador();
-    }
+  2: "Mais do que namorados, quero que sejamos parceiros: que um apoie o outro nos dias bons e nos difíceis, que a gente converse, aprenda e cresça junto. Você não precisa enfrentar tudo sozinho. ♥",
+
+  3: "Eu amo os nossos detalhes, as nossas brincadeiras, as coisas que só nós entendemos e tudo aquilo que faz a nossa relação ser única. Que nunca nos faltem motivos para sorrir juntos. ♥"
+};
+
+let slideAtual = 0;
+let musicaTocando = false;
+
+/* Navegação entre páginas */
+function navegarPara(pagina) {
+  window.location.href = pagina;
+}
+
+/* Surpresa de aniversário */
+function surpresaRomantica() {
+  abrirModal(
+    "Eu espero que seu novo ciclo seja tão lindo quanto o carinho que sinto por você. Que você realize seus sonhos, tenha paz no coração e nunca se esqueça do quanto é especial. Feliz aniversário, meu amor! ♥"
+  );
+}
+
+/* Mensagens surpresa */
+function revelarMensagem(numero) {
+  abrirModal(
+    mensagensSurpresa[numero] ||
+    "Você é muito especial para mim. ♥"
+  );
+}
+
+/* Abrir janela de mensagem */
+function abrirModal(mensagem) {
+  const modal = document.getElementById("janelaSurpresa");
+  const texto = document.getElementById("textoSurpresa");
+
+  if (!modal || !texto) return;
+
+  texto.textContent = mensagem;
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+/* Fechar janela de mensagem */
+function fecharSurpresa() {
+  const modal = document.getElementById("janelaSurpresa");
+
+  if (modal) {
+    modal.style.display = "none";
+  }
+
+  document.body.style.overflow = "";
+}
+
+/* Fechar com Escape ou clicando fora da mensagem */
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    fecharSurpresa();
+  }
 });
 
-// Mensagem Dinâmica na Aba do Navegador
-const tituloOriginal = document.title;
-window.addEventListener('blur', () => { document.title = "Volta aqui, sinto sua falta! ❤️"; });
-window.addEventListener('focus', () => { document.title = tituloOriginal; });
+document.addEventListener("click", (event) => {
+  const modal = document.getElementById("janelaSurpresa");
 
-function navegarPara(url) {
-    window.location.href = url;
+  if (modal && event.target === modal) {
+    fecharSurpresa();
+  }
+});
+
+/* Carrossel de fotos */
+function mostrarSlide(indice) {
+  const slides = [...document.querySelectorAll(".slide")];
+
+  if (!slides.length) return;
+
+  slideAtual = (indice + slides.length) % slides.length;
+
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === slideAtual);
+  });
+
+  document.querySelectorAll(".carousel-dot").forEach((dot, i) => {
+    dot.classList.toggle("active", i === slideAtual);
+  });
 }
 
-function atualizarContador() {
-    const dataAlvo = new Date("OUTUBRO 25, 2026 23:59:59").getTime();
-
-    const atualizarContador = setInterval(() => {
-      const agora = new Date().getTime();
-      const distancia = dataAlvo - agora;
-
-      if (distancia < 0) {
-        clearInterval(atualizarContador);
-        document.getElementById("contador").innerHTML = "O tempo acabou! FELIZ ANIVERSÁRIO";
-        return;
-      }
-
-      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-
-      document.getElementById("contador").innerHTML = 
-        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-    }, 1000);
-}
-
-function alternarMusica() {
-    const musica = document.getElementById('musicaParabens');
-    const icone = document.getElementById('iconeMusica');
-    if (!musica || !icone) return;
-
-    if (!musica.paused) {
-        musica.pause();
-        icone.innerText = "🔇";
-        sessionStorage.setItem('musicaTocando', 'false');
-    } else {
-        musica.play().catch(e => console.log("Áudio bloqueado"));
-        icone.innerText = "🎵";
-        sessionStorage.setItem('musicaTocando', 'true');
-    }
-}
-
-function surpresaRomantica() {
-    const musica = document.getElementById('musicaParabens');
-    const icone = document.getElementById('iconeMusica');
-    if (musica && musica.paused) {
-        musica.play().catch(e => console.log("Erro áudio"));
-        if (icone) icone.innerText = "🎵";
-        sessionStorage.setItem('musicaTocando', 'true');
-    }
-    lancarMisto();
-}
-
-function lancarMisto() {
-    const cores = ['#ff4757', '#ff6b81', '#ff7f50', '#ffa502', '#ff6b9d', '#ffeedd'];
-    const tipos = ['confete', 'romantico'];
-    const emojisRomanticos = ['❤️', '💖', '💘', '🥰', '✨', '💝'];
-
-    for (let i = 0; i < 100; i++) {
-        const elemento = document.createElement('div');
-        elemento.classList.add('elemento');
-        const tipoAtual = tipos[Math.floor(Math.random() * tipos.length)];
-        
-        if (tipoAtual === 'confete') {
-            elemento.style.width = Math.random() * 8 + 6 + 'px';
-            elemento.style.height = Math.random() * 8 + 6 + 'px';
-            elemento.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
-            elemento.style.borderRadius = Math.random() > 0.5 ? '50%' : '0px';
-        } else {
-            elemento.innerText = emojisRomanticos[Math.floor(Math.random() * emojisRomanticos.length)];
-            elemento.style.fontSize = Math.random() * 18 + 12 + 'px';
-        }
-        
-        elemento.style.left = Math.random() * 100 + 'vw';
-        elemento.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
-        elemento.style.animationDelay = (Math.random() * 1.5) + 's';
-        elemento.style.opacity = Math.random() * 0.7 + 0.3;
-        
-        document.body.appendChild(elemento);
-        setTimeout(() => elemento.remove(), 5500);
-    }
-}
-
-function revelarMensagem(idSurpresa) {
-    const modal = document.getElementById("janelaSurpresa");
-    const imagem = document.getElementById("imagemSurpresa");
-    const textoEl = document.getElementById("textoSurpresa");
-    if (!modal || !imagem || !textoEl) return;
-
-    let mensagemCompleta = "";
-    if (idSurpresa === 1) {
-        imagem.src = "";
-        mensagemCompleta = "Meu amor por você é como o código mais perfeito já escrito: não tem falhas, roda perfeitamente no meu coração todos os dias e foi feito para durar uma vida inteira. Obrigado por ser minha melhor conexão! 💻❤️✨";
-    } else if (idSurpresa === 2) {
-        imagem.src = "";
-        mensagemCompleta = "Você é a engrenagem que faz o meu mundo girar e a força que me move para frente nos momentos mais difíceis. Do seu lado, sinto que podemos construir o futuro mais incrível que existe! 🤖💝🚀";
-    } else if (idSurpresa === 3) {
-        imagem.src = "";
-        mensagemCompleta = "Minha vida era em preto e branco antes de você chegar, mas você trouxe as cores mais lindas, vibrantes e profundas para o meu mundo. Feliz aniversário, você é a minha obra-prima favorita! 🎨🥰💖";
-    }
-
-    modal.style.display = "flex";
-    clearInterval(t_id);
-    textoEl.innerText = "";
-    let index = 0;
-    
-    t_id = setInterval(() => {
-        if (index < mensagemCompleta.length) {
-            textoEl.innerText += mensagemCompleta.charAt(index);
-            index++;
-        } else {
-            clearInterval(t_id);
-        }
-    }, 30);
-}
-
-function fecharSurpresa() {
-    const modal = document.getElementById("janelaSurpresa");
-    if (modal) modal.style.display = "none";
-    clearInterval(t_id);
-}
-
-// Carrossel de Fotos
-let slideAtual = 0;
 function mudarSlide(direcao) {
-    const slides = document.querySelectorAll('.slide');
-    if (slides.length === 0) return;
-    slides[slideAtual].classList.remove('active', 'ativo');
-    slideAtual += direcao;
-    if (slideAtual >= slides.length) slideAtual = 0;
-    if (slideAtual < 0) slideAtual = slides.length - 1;
-    slides[slideAtual].classList.add('ativo');
+  mostrarSlide(slideAtual + direcao);
 }
 
-// Quiz
-function verificarResposta(botao, eCorreta) {
-    const resultado = document.getElementById('resultadoQuiz');
-    if (eCorreta) {
-        resultado.innerText = "Acertou! Você lembra perfeitamente 🥰🎉";
-        resultado.style.color = "#2ed573";
-        lancarMisto();
-    } else {
-        resultado.innerText = "Hum, não foi aí... Tenta de novo! 👀";
-        resultado.style.color = "#ff4757";
+function prepararCarrossel() {
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.getElementById("carouselDots");
+
+  if (!slides.length || !dots) return;
+
+  dots.innerHTML = "";
+
+  slides.forEach((_, indice) => {
+    const dot = document.createElement("button");
+
+    dot.className =
+      "carousel-dot" + (indice === 0 ? " active" : "");
+
+    dot.setAttribute(
+      "aria-label",
+      `Ir para foto ${indice + 1}`
+    );
+
+    dot.addEventListener("click", () => {
+      mostrarSlide(indice);
+    });
+
+    dots.appendChild(dot);
+  });
+
+  mostrarSlide(0);
+}
+
+/* Quiz romântico */
+function verificarResposta(botao, correta) {
+  const resultado = document.getElementById("resultadoQuiz");
+  const opcoes = document.querySelectorAll(".quiz-options button");
+
+  if (!resultado) return;
+
+  opcoes.forEach((opcao) => {
+    opcao.disabled = true;
+    opcao.classList.remove("correct", "incorrect");
+  });
+
+  if (correta) {
+    botao.classList.add("correct");
+
+    resultado.textContent =
+      "Acertou! Você guarda nossas lembranças tão bem quanto eu guardo você no coração. ♥";
+  } else {
+    botao.classList.add("incorrect");
+
+    resultado.textContent =
+      "Quase! Essa é uma boa desculpa para relembrarmos nossa história juntos. ♥";
+
+    const certa = [...opcoes].find((opcao) =>
+      opcao.getAttribute("onclick")?.includes("true")
+    );
+
+    if (certa) {
+      certa.classList.add("correct");
     }
+  }
 }
 
-// Botão que Foge
+/* Botão NÃO que foge */
 function fugirBotao() {
-    const btnNao = document.getElementById('btnNao');
-    if (!btnNao) return;
-    const x = Math.random() * 160 - 80; 
-    const y = Math.random() * 80 - 40;
-    btnNao.style.transform = `translate(${x}px, ${y}px)`;
+  const botao = document.getElementById("btnNao");
+
+  if (!botao) return;
+
+  const margem = 16;
+
+  const maxX = Math.max(
+    margem,
+    window.innerWidth - botao.offsetWidth - margem
+  );
+
+  const maxY = Math.max(
+    margem,
+    window.innerHeight - botao.offsetHeight - margem
+  );
+
+  botao.style.position = "fixed";
+  botao.style.left =
+    `${margem + Math.random() * (maxX - margem)}px`;
+
+  botao.style.top =
+    `${margem + Math.random() * (maxY - margem)}px`;
+
+  botao.style.zIndex = "80";
 }
 
+/* Quando a pessoa aceita */
 function aceitouFoge() {
-    alert("Eba! Eu já sabia que a resposta seria essa! Te amo Incodicionalmente! 💖💍");
-    lancarMisto();
+  const mensagem = document.getElementById("mensagemFuturo");
+
+  if (mensagem) {
+    mensagem.textContent =
+      "Então está combinado: que a gente continue escolhendo o amor, cuidando um do outro e escrevendo uma história linda, um dia de cada vez. Eu amo você! ♥";
+  }
+
+  criarChuvaDeCoracoes(28);
+
+  const botao = document.getElementById("btnNao");
+
+  if (botao) {
+    botao.style.display = "none";
+  }
 }
 
-window.onclick = function(event) {
-    const modal = document.getElementById("janelaSurpresa");
-    if (modal && event.target === modal) {
-        modal.style.display = "none";
-        clearInterval(t_id);
-    }
+/* Chuva de corações */
+function criarChuvaDeCoracoes(quantidade = 18) {
+  const area =
+    document.querySelector(".floating-hearts") ||
+    document.body;
+
+  for (let i = 0; i < quantidade; i++) {
+    const coracao = document.createElement("span");
+
+    coracao.className = "floating-heart";
+    coracao.textContent =
+      Math.random() > 0.3 ? "♥" : "✦";
+
+    coracao.style.left = `${Math.random() * 100}%`;
+
+    coracao.style.fontSize =
+      `${12 + Math.random() * 20}px`;
+
+    coracao.style.animationDuration =
+      `${4 + Math.random() * 5}s`;
+
+    coracao.style.animationDelay =
+      `${Math.random() * 1.8}s`;
+
+    area.appendChild(coracao);
+
+    coracao.addEventListener(
+      "animationend",
+      () => coracao.remove(),
+      { once: true }
+    );
+  }
 }
+
+/* Música de aniversário */
+function alternarMusica() {
+  const audio = document.getElementById("musicaParabens");
+  const icone = document.getElementById("iconeMusica");
+
+  if (!audio) {
+    alert("Não foi encontrado o elemento de áudio no HTML.");
+    return;
+  }
+
+  if (audio.paused) {
+    audio.play()
+      .then(() => {
+        musicaTocando = true;
+
+        if (icone) {
+          icone.textContent = "Ⅱ";
+        }
+      })
+      .catch(() => {
+        alert(
+          "Não foi possível tocar a música. Confira se o arquivo nastelbom-happy-birthday-471481.mp3 está na pasta do site."
+        );
+      });
+  } else {
+    audio.pause();
+    musicaTocando = false;
+
+    if (icone) {
+      icone.textContent = "♫";
+    }
+  }
+}
+
+/* Inicialização */
+document.addEventListener("DOMContentLoaded", () => {
+  prepararCarrossel();
+
+  const audio = document.getElementById("musicaParabens");
+
+  if (audio) {
+    audio.loop = true;
+    audio.volume = 0.6;
+  }
+
+  if (document.querySelector(".floating-hearts")) {
+    setTimeout(() => criarChuvaDeCoracoes(12), 500);
+  }
+});

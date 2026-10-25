@@ -1,59 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Surpresa ❤️</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b10">
+  <title>Nossas surpresas ❤️</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
 </head>
-<body>
-
-    <div class="controle-musica" onclick="alternarMusica()">
-        <span id="iconeMusica">🎵</span>
-    </div>
-
-    <div class="botoes-topo">
-        <button class="btn-navegar" onclick="navegarPara('index.html')">⬅Voltar ao Início</button>
-    </div>
-
-    <section class="historia">
-        <article class="card">
-            <img src="27992.jpeg" alt="Nossos Momentos" />
-            <div class="informacoes">
-                <h2>Uma história só nossa..</h2>
-                <button class="btn-estilizado" onclick="revelarMensagem(1)">Revelar Surpresa</button>
-            </div>
-        </article>
-        <article class="card">
-            <img src="27991.jpeg" alt="Nosso apoio" />
-            <div class="informacoes">
-                <h2>Nosso companherismo</h2>
-                <button class="btn-estilizado" onclick="revelarMensagem(2)">Revelar Surpresa</button>
-            </div>
-        </article>
-
-        <article class="card">
-            <img src="27993.jpeg" alt="Coisas favoritas" />
-            <div class="informacoes">
-                <h2>Cada um com suas coisas favoritas...</h2>
-                <button class="btn-estilizado" onclick="revelarMensagem(3)">Revelar Surpresa</button>
-            </div>
-        </article>
+<body data-page="surpresas">
+  <button class="music-control" type="button" onclick="alternarMusica()" aria-label="Ativar ou pausar música"><span id="iconeMusica">♫</span><span class="music-label">Música</span></button>
+  <header class="subpage-header">
+    <a class="back-link" href="index.html">← Voltar ao início</a>
+    <p class="eyebrow">PEQUENOS PEDAÇOS DA NOSSA HISTÓRIA</p>
+    <h1>Surpresas <span>para você</span></h1>
+    <p>Cada lembrança guarda um pedacinho do que construímos juntos.</p>
+  </header>
+  <main>
+    <section class="story-grid">
+      <article class="story-card">
+        <img src="27992.jpeg" alt="Uma lembrança especial nossa" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="image-fallback">♥<small></small></div>
+        <div class="story-content"><span class="card-number">01 / NOSSOS MOMENTOS</span><h2>Uma história só nossa</h2><p>Existem lembranças que ficam guardadas para sempre.</p><button class="btn btn-outline" onclick="revelarMensagem(1)">Revelar surpresa ✦</button></div>
+      </article>
+      <article class="story-card">
+        <img src="27991.jpeg" alt="Nosso companheirismo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="image-fallback">♥<small></small></div>
+        <div class="story-content"><span class="card-number">02 / O MELHOR APOIO</span><h2>Nosso companheirismo</h2><p>Que nunca nos faltem apoio, conversa e carinho.</p><button class="btn btn-outline" onclick="revelarMensagem(2)">Revelar surpresa ✦</button></div>
+      </article>
+      <article class="story-card">
+        <img src="27993.jpeg" alt="Nossas coisas favoritas" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="image-fallback">♥<small></small></div>
+        <div class="story-content"><span class="card-number">03 / NOSSOS MULTIVERSOS</span><h2>Nosso multiverso</h2><p>São os detalhes simples que deixam tudo especial.</p><button class="btn btn-outline" onclick="revelarMensagem(3)">Revelar surpresa ✦</button></div>
+      </article>
     </section>
-
-    <div class="navegacao-central">
-        <button class="btn-navegar" onclick="navegarPara('galeria.html')">Ir para Nossa Galeria</button>
+    <div class="center-action"><a class="btn btn-gold" href="galeria.html">Ir para nossa galeria →</a></div>
+  </main>
+  <div id="janelaSurpresa" class="modal" role="dialog" aria-modal="true" aria-labelledby="textoSurpresa" style="display:none">
+    <div class="modal-content">
+      <button class="close-modal" onclick="fecharSurpresa()" aria-label="Fechar">×</button>
+      <div class="modal-heart">♥</div><p class="eyebrow">UMA MENSAGEM PARA VOCÊ</p>
+      <img id="imagemSurpresa" src="" alt="Foto da lembrança" style="display:none">
+      <p id="textoSurpresa"></p>
+      <button class="btn btn-gold" onclick="fecharSurpresa()">Guardar no coração ♥</button>
     </div>
-
-    <div id="janelaSurpresa" class="modal" style="display: none;">
-        <div class="modal-conteudo">
-            <span class="botao-fechar" onclick="fecharSurpresa()">&times;</span>
-            <img id="imagemSurpresa" src="" alt="Imagem da Surpresa" />
-            <p id="textoSurpresa"></p>
-        </div>
-    </div>
-
-    <audio id="musicaParabens" src="https://soundhelix.com" preload="auto" loop></audio>
+  </div>
+  <audio id="musicaParabens" preload="none" loop></audio>
+  <footer>COM TODO O MEU AMOR <span>✦</span></footer>
 </body>
 </html>
